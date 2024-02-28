@@ -3,6 +3,7 @@ import { Transactions } from './Transactions'
 import { Routes, Route, Link } from 'react-router-dom'
 import { TransactionDetails } from './TransactionDetails'
 import { TransactionForm } from './TransactionForm'
+import { NavBar } from './NavBar'
 
 const App = () => {
   const [allTransactions, setAllTransactions] = useState([])
@@ -13,12 +14,7 @@ const App = () => {
 
 
   return <div>
-    <h1>Budgeting App</h1>
-    
-    <Link to='/new'>
-    <button>Create</button>
-    </Link>
-
+    <NavBar />
     <Routes>
       <Route path='/' element={<Transactions allTransactions={allTransactions}/>}/>
       <Route path='/:id' element={<TransactionDetails setAllTransactions={setAllTransactions}/>}/>
