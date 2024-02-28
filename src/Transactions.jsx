@@ -6,13 +6,13 @@ export const Transactions = ({allTransactions}) => {
     <div>
     {allTransactions.map(({id, item_name, amount, date, from, category}) => {
         return (
-            <div key={id}>
+            <Link to={`/${id}`} key={id}>
             <h1>{item_name}</h1>
             <p>{amount}</p>
             <p>{date}</p>
             <p>{from}</p>
             <p>{category}</p>
-        </div>
+        </Link>
         )
     })}
     </div>
