@@ -14,7 +14,7 @@ const App = () => {
 
 
   return <div>
-    <NavBar />
+    <NavBar allTransactions={allTransactions}/>
     <Routes>
       <Route path='/' element={<Transactions allTransactions={allTransactions}/>}/>
       <Route path='/:id' element={<TransactionDetails setAllTransactions={setAllTransactions}/>}/>
