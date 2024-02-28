@@ -19,11 +19,17 @@ export const TransactionForm = ({setAllTransactions}) => {
             body: JSON.stringify(transaction)
         };
 
-        fetch('http://localhost:3333/api/transactions', options).then(res => res.json()).then(data => {setAllTransactions(data.transactions)
-        navigate('/')})
+        fetch('http://localhost:3333/api/transactions', options).then(res => res.json()).then(data => {
+          if (data.message) alert("All Inputs Must Be Filled");
+          else {
+            setAllTransactions(data.transactions)
+            navigate("/");
+          }
+        })
+        .catch((err) => console.log(err));
     }
 
-    
+
     const handleChange = (e) => {
         const { name, value, type } = e.target;
         const parsedValue = type === 'number' ? parseFloat(value) : value;        setTransaction(prevTransaction => ({

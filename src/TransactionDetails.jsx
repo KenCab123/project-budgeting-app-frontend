@@ -11,12 +11,11 @@ export const TransactionDetails = () => {
 
     if(!transactionDetail) return null
 
-
   return (
     <div>
         <h1>Transaction Details</h1>
         <h2>{transactionDetail.item_name}</h2>
-        <p>Amount: {transactionDetail.amount}</p>
+        <p>Amount: ${transactionDetail.amount}</p>
         <p>Date: {transactionDetail.date}</p>
         <p>From: {transactionDetail.from}</p>
         <p>Category: {transactionDetail.category}</p>
