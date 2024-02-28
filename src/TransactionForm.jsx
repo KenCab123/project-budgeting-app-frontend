@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
-import { Link , useNavigate} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link , useNavigate, useParams} from 'react-router-dom'
 
 export const TransactionForm = ({setAllTransactions}) => {
     const navigate = useNavigate()
+    const {id} = useParams()
+
     const [transaction, setTransaction] = useState({
             item_name: "",
             amount: 0,
@@ -13,20 +15,41 @@ export const TransactionForm = ({setAllTransactions}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const options = {
-            method: "POST",
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify(transaction)
-        };
 
-        fetch('http://localhost:3333/api/transactions', options).then(res => res.json()).then(data => {
-          if (data.message) alert("All Inputs Must Be Filled");
-          else {
-            setAllTransactions(data.transactions)
-            navigate("/");
-          }
-        })
-        .catch((err) => console.log(err));
+        if(id) {
+            const options = {
+                method: "PUT",
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify(transaction)
+            }
+
+            fetch(`http://localhost:3333/api/transactions/${id}`, options).then(res => res.json()).then(data => setAllTransactions(data.transactions)).then(() => navigate('/'))
+        } else {
+
+            const options = {
+                method: "POST",
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify(transaction)
+            };
+    
+            fetch('http://localhost:3333/api/transactions', options).then(res => res.json()).then(data => {
+              if (data.message) {
+                alert("All Inputs Must Be Filled")
+                setTransaction({
+                    item_name: "",
+                    amount: 0,
+                    date: "",
+                    from: "",
+                    category: ""
+            })
+              } else {
+                setAllTransactions(data.transactions)
+                navigate("/");
+              }
+            })
+            .catch((err) => console.log(err));
+        }
+        
     }
 
 
@@ -36,9 +59,23 @@ export const TransactionForm = ({setAllTransactions}) => {
             ...prevTransaction,
             [name]: parsedValue
     }));
-
-
     }
+
+    useEffect(() => {
+        if(id) {
+            fetch(`http://localhost:3333/api/transactions/${id}`).then(res => res.json()).then(data => setTransaction(data.transaction))
+        } else {
+            setTransaction({
+                item_name: "",
+                amount: 0,
+                date: "",
+                from: "",
+                category: ""
+            })
+        }
+    }, [id])
+
+
   return (
     <div>
         <h1>Transaction Form</h1>

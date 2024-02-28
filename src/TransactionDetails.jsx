@@ -19,6 +19,9 @@ export const TransactionDetails = () => {
         <p>Date: {transactionDetail.date}</p>
         <p>From: {transactionDetail.from}</p>
         <p>Category: {transactionDetail.category}</p>
+        <Link to={`/edit/${transactionDetail.id}`}>
+            <button>Edit</button>
+        </Link>
         <Link to='/'>
             <button>Home</button>
         </Link>

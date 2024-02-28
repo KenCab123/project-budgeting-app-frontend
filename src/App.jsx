@@ -22,6 +22,7 @@ const App = () => {
     <Routes>
       <Route path='/' element={<Transactions allTransactions={allTransactions}/>}/>
       <Route path='/:id' element={<TransactionDetails/>}/>
+      <Route path='/edit/:id' element={<TransactionForm setAllTransactions={setAllTransactions}/>}/>
       <Route path='/new' element={<TransactionForm setAllTransactions={setAllTransactions}/>}/>
     </Routes>
     
