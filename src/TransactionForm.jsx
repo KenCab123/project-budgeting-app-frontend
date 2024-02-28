@@ -23,7 +23,15 @@ export const TransactionForm = ({setAllTransactions}) => {
                 body: JSON.stringify(transaction)
             }
 
-            fetch(`http://localhost:3333/api/transactions/${id}`, options).then(res => res.json()).then(data => setAllTransactions(data.transactions)).then(() => navigate('/'))
+            fetch(`http://localhost:3333/api/transactions/${id}`, options).then(res => res.json()).then(data =>{
+                if (data.message) {
+                    alert("All Inputs Must Be Filled")
+                  } else {
+                    setAllTransactions(data.transactions)
+                    navigate("/");
+                  }
+                })
+                .catch((err) => console.log(err));
         } else {
 
             const options = {
@@ -117,7 +125,13 @@ export const TransactionForm = ({setAllTransactions}) => {
                  value={transaction.from} />
             </label>
             <label htmlFor="category">
-                Category:
+                Categories:
+                {/* <select onChange={handleChange} name="category" id="category" value={transaction.category}>
+                    <option value="income">Income</option>
+                    <option value="food">Food</option>
+                    <option value="savings">Savings</option>
+                    <option value="pets">Pets</option>
+                </select> */}
                 <input 
                  onChange={handleChange}
                  type="text"
