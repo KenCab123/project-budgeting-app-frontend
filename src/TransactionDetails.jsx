@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 
-export const TransactionDetails = ({setAllTransactions}) => {
+export const TransactionDetails = ({setAllTransactions, handleDate}) => {
     const navigate = useNavigate()
     const {id} = useParams()
     const [transactionDetail, setTransactionDetail] = useState()
@@ -27,7 +27,7 @@ export const TransactionDetails = ({setAllTransactions}) => {
         <h1>Transaction Details</h1>
         <h2>{transactionDetail.item_name}</h2>
         <p>Amount: ${transactionDetail.amount}</p>
-        <p>Date: {transactionDetail.date}</p>
+        <p>Date: {handleDate(transactionDetail.date)}</p>
         <p>From: {transactionDetail.from}</p>
         <p>Category: {transactionDetail.category}</p>
         <Link to={`/edit/${transactionDetail.id}`}>

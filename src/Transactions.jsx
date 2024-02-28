@@ -1,9 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export const Transactions = ({allTransactions}) => {
-
-    
+export const Transactions = ({allTransactions, handleDate}) => {
 
   return (
     <div>
@@ -12,7 +10,7 @@ export const Transactions = ({allTransactions}) => {
             <Link to={`/${id}`} key={id}>
             <h1>{item_name}</h1>
             <p>Price: ${amount}</p>
-            <p>Date: {date}</p>
+            <p>Date: {handleDate(date)}</p>
             <p>From: {from}</p>
             <p>Category: {category}</p>
         </Link>

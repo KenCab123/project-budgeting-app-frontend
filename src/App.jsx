@@ -12,12 +12,18 @@ const App = () => {
     fetch(`http://localhost:3333/api/transactions`).then(res => res.json()).then(data => setAllTransactions(data.transactions))
   }, [])
 
+  const handleDate = (date) => {
+    const convertedDate = new Date(date)
+    const options = {year: 'numeric', month: 'long', day: 'numeric'}
+    return convertedDate.toLocaleDateString('en-US', options)
+}   
+
 
   return <div>
     <NavBar allTransactions={allTransactions}/>
     <Routes>
-      <Route path='/' element={<Transactions allTransactions={allTransactions}/>}/>
-      <Route path='/:id' element={<TransactionDetails setAllTransactions={setAllTransactions}/>}/>
+      <Route path='/' element={<Transactions allTransactions={allTransactions} handleDate={handleDate}/>}/>
+      <Route path='/:id' element={<TransactionDetails setAllTransactions={setAllTransactions} handleDate={handleDate}/>}/>
       <Route path='/edit/:id' element={<TransactionForm setAllTransactions={setAllTransactions}/>}/>
       <Route path='/new' element={<TransactionForm setAllTransactions={setAllTransactions}/>}/>
     </Routes>
