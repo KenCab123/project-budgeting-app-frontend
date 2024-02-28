@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 export const TransactionDetails = () => {
     const {id} = useParams()
@@ -11,15 +11,18 @@ export const TransactionDetails = () => {
 
     if(!transactionDetail) return null
 
-    
+
   return (
     <div>
         <h1>Transaction Details</h1>
-        <p>Name: {transactionDetail.item_name}</p>
+        <h2>{transactionDetail.item_name}</h2>
         <p>Amount: {transactionDetail.amount}</p>
         <p>Date: {transactionDetail.date}</p>
         <p>From: {transactionDetail.from}</p>
         <p>Category: {transactionDetail.category}</p>
+        <Link to='/'>
+            <button>Home</button>
+        </Link>
     </div>
   )
 }

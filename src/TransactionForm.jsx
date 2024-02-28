@@ -22,11 +22,13 @@ export const TransactionForm = ({setAllTransactions}) => {
         fetch('http://localhost:3333/api/transactions', options).then(res => res.json()).then(data => {setAllTransactions(data.transactions)
         navigate('/')})
     }
+
+    
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setTransaction(prevTransaction => ({
+        const { name, value, type } = e.target;
+        const parsedValue = type === 'number' ? parseFloat(value) : value;        setTransaction(prevTransaction => ({
             ...prevTransaction,
-            [name]: value
+            [name]: parsedValue
     }));
 
 
