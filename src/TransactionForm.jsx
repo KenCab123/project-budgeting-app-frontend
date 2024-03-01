@@ -1,20 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import { Link , useNavigate, useParams} from 'react-router-dom'
+import "./TransactionForm.css"
 
-export const TransactionForm = ({setAllTransactions}) => {
+export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, price, handleTotalPrice}) => {
     const navigate = useNavigate()
     const {id} = useParams()
-
+    const[isChecked, setIsChecked] = useState(true)
     const [transaction, setTransaction] = useState({
-            item_name: "",
-            amount: 0,
-            date: "",
-            from: "",
-            category: ""
+        item_name: "",
+        amount: 0,
+        date: "",
+        from: "",
+        category: "",
+        isChecked: isChecked
     })
+
+    // useEffect (() => {
+    //     if(transaction.amount < 0) {
+    //         setTransaction(prevTransaction => ({
+    //             ...prevTransaction,
+    //             isChecked: false
+    //         }));
+            
+    //         console.log(`negative`)
+    //     }
+    //         // console.log(transaction.isChecked)
+    // },[transaction.amount])
 
     const handleSubmit = (e) => {
         e.preventDefault()
+    
+        if(!isChecked){
+            transaction.amount = -transaction.amount
+        }
+
 
         if(id) {
             const options = {
@@ -25,7 +44,7 @@ export const TransactionForm = ({setAllTransactions}) => {
 
             fetch(`http://localhost:3333/api/transactions/${id}`, options).then(res => res.json()).then(data =>{
                 if (data.message) {
-                    alert("All Inputs Must Be Filled")
+                    alert("Invalid Inputs")
                   } else {
                     setAllTransactions(data.transactions)
                     navigate("/");
@@ -42,13 +61,14 @@ export const TransactionForm = ({setAllTransactions}) => {
     
             fetch('http://localhost:3333/api/transactions', options).then(res => res.json()).then(data => {
               if (data.message) {
-                alert("All Inputs Must Be Filled")
+                alert("Invalid Inputs")
                 setTransaction({
                     item_name: "",
                     amount: 0,
                     date: "",
                     from: "",
-                    category: ""
+                    category: "",
+                    isChecked: true
             })
               } else {
                 setAllTransactions(data.transactions)
@@ -62,27 +82,42 @@ export const TransactionForm = ({setAllTransactions}) => {
 
 
     const handleChange = (e) => {
+        if (e.target.value.startsWith("-")) {
+            e.target.value = e.target.value.slice(1);
+        }
         const { name, value, type } = e.target;
-        const parsedValue = type === 'number' ? parseFloat(value) : value;        setTransaction(prevTransaction => ({
+        const parsedValue = type === 'number' ? parseFloat(value) : value;
+        setTransaction(prevTransaction => ({
             ...prevTransaction,
             [name]: parsedValue
-    }));
+        }));
     }
 
+    const toggleSwitch = (e) => {
+        setIsChecked(!isChecked)
+        console.log(!isChecked)
+    }
+
+    
     useEffect(() => {
         if(id) {
-            fetch(`http://localhost:3333/api/transactions/${id}`).then(res => res.json()).then(data => setTransaction(data.transaction))
+            fetch(`http://localhost:3333/api/transactions/${id}`).then(res => res.json()).then(data => {
+                setTransaction(data.transaction)
+                if(data.transaction.amount < 0) setIsChecked(false)
+            })
         } else {
             setTransaction({
                 item_name: "",
                 amount: 0,
                 date: "",
                 from: "",
-                category: ""
+                category: "",
+                isChecked: true
             })
         }
     }, [id])
 
+    
 
   return (
     <div>
@@ -97,6 +132,9 @@ export const TransactionForm = ({setAllTransactions}) => {
                  name='item_name'
                  value={transaction.item_name} />
             </label>
+
+            <input type="checkbox" id='checkbox' onChange={toggleSwitch} checked={isChecked ? true : false} />
+            <label htmlFor="checkbox" className='checkbox-label' id='checkbox-label'>{isChecked ? 'Deposit' : 'Withdraw'}</label>
             <label htmlFor="amount">
                 Amount:
                 <input 
@@ -104,7 +142,8 @@ export const TransactionForm = ({setAllTransactions}) => {
                  type="number"
                  id='amount'
                  name='amount'
-                 value={transaction.amount} />
+                 value={transaction.amount}
+                 min="0" />
             </label>
             <label htmlFor="date">
                 Date:
@@ -126,12 +165,6 @@ export const TransactionForm = ({setAllTransactions}) => {
             </label>
             <label htmlFor="category">
                 Categories:
-                {/* <select onChange={handleChange} name="category" id="category" value={transaction.category}>
-                    <option value="income">Income</option>
-                    <option value="food">Food</option>
-                    <option value="savings">Savings</option>
-                    <option value="pets">Pets</option>
-                </select> */}
                 <input 
                  onChange={handleChange}
                  type="text"
@@ -145,45 +178,5 @@ export const TransactionForm = ({setAllTransactions}) => {
         <button>Cancel</button>
         </Link>
     </div>
-    // <div>
-    //   <h1>BookMark Form</h1>
-    //   <form onSubmit={handleSubmit}>
-    //     <label htmlFor="name">
-    //       Name:
-    //       <input
-    //         onChange={handleChange}
-    //         type="text"
-    //         id="name"
-    //         name="name"
-    //         // value={bookmark.name}
-    //       />
-          
-    //     </label>
-    //     <label htmlFor="url">
-    //       Url:
-    //       <input
-    //         onChange={handleChange}
-    //         type="text"
-    //         id="url"
-    //         name="url"
-    //         // value={bookmark.url}
-    //       />
-    //     </label>
-    //     <label htmlFor="category">
-    //       Category:
-    //       <input
-    //         onChange={handleChange}
-    //         type="text"
-    //         id="category"
-    //         name="category"
-    //         // value={bookmark.category}
-    //       />
-    //     </label>
-    //     <button>Submit</button>
-    //   </form>
-    //     <Link to={`/`}>
-    //     <button>Cancel</button>
-    //     </Link>
-    // </div>
   )
 }

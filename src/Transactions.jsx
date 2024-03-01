@@ -8,11 +8,9 @@ export const Transactions = ({allTransactions, handleDate}) => {
     {allTransactions.map(({id, item_name, amount, date, from, category}) => {
         return (
             <Link to={`/${id}`} key={id}>
-            <h1>{item_name}</h1>
+            <h1>{item_name[0].toUpperCase() + item_name.slice(1)}</h1>
             <p>Price: ${amount}</p>
-            <p>Date: {handleDate(date)}</p>
             <p>From: {from}</p>
-            <p>Category: {category}</p>
         </Link>
         )
     })}

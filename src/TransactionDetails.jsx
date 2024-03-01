@@ -25,7 +25,7 @@ export const TransactionDetails = ({setAllTransactions, handleDate}) => {
   return (
     <div>
         <h1>Transaction Details</h1>
-        <h2>{transactionDetail.item_name}</h2>
+        <h2>{transactionDetail.item_name[0].toUpperCase() + transactionDetail.item_name.slice(1)}</h2>
         <p>Amount: ${transactionDetail.amount}</p>
         <p>Date: {handleDate(transactionDetail.date)}</p>
         <p>From: {transactionDetail.from}</p>

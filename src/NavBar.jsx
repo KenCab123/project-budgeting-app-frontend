@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 
-export const NavBar = ({allTransactions}) => {
+export const NavBar = ({allTransactions, setPrice, price, handleTotalPrice, dataLoaded}) => {
 
-    const handleTotalPrice = (amount) => {
-        if(amount <= 0) return <h2>Total Price: <span style={{color: 'red'}}>${amount}</span></h2>
-        if(amount < 100 && amount > 0) return <h2>Total Price: <span style={{color: 'yellow'}}>${amount}</span></h2>
-        return <h2>Total Price: <span style={{color: 'green'}}>${amount}</span></h2>
-    }
+  useEffect(() => {
 
+    if (allTransactions.length > 0) {
+      setPrice(allTransactions.reduce((acc, curr) => acc + curr.amount, 0));
+    } 
+  }, [allTransactions]);
+
+
+  
 
   return (
     <>
@@ -18,8 +21,7 @@ export const NavBar = ({allTransactions}) => {
     <Link to='/new'>
     <button>Create</button>
     </Link>
-
-    {handleTotalPrice(allTransactions.reduce((acc, curr) => acc + curr.amount,0))}
+    {handleTotalPrice(price)}
     </>
   )
 }
