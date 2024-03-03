@@ -1,0 +1,25 @@
+.all-t div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid black;
+    padding: 40px;
+}
+
+.all-t {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    column-gap: 70px;
+    row-gap: 50px;
+    text-align: center;
+    padding: 50px;
+}
+.all-t h1 {
+    color: black;
+    margin-top: -25px;
+    /* text-decoration: line-through; */
+}
+.all-t p {
+    margin-top: 18px;
+}
