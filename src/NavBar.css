@@ -1,10 +1,9 @@
 .nav {
     display: flex;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     background: rgb(75, 156, 62);
 }
 .nav h1 {
-    /* padding-top: 20px; */
     text-align: center;
     margin: 20px;
     position: relative;
@@ -13,7 +12,7 @@
 .nav h1::after {
     content: '';
     position: absolute;
-    bottom: 67px; 
+    bottom: 57px; 
     left: 0;
     width: 100%;
     border-bottom: 3px solid black; 
@@ -31,8 +30,8 @@
 
 .nav h2 {
     cursor: default;
-    margin-left: 20%;
+    margin-left: 22%;
     margin-top: 70px;
-    font-size: 50px;
+    font-size: 40px;
     padding-bottom: 20px;
 }
