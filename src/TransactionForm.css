@@ -1,4 +1,54 @@
+.transaction-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+    justify-content: center;
+    align-items: center;
+}
+.transaction-form h1 {
+    /* padding: 10px 0px 0px 50px; */
+    /* margin-right: 59%; */
+    margin-top: 1%;
+}
+.form {
+    border: 1px solid black;
+    /* display: grid; */
+    width: max-content;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding: 40px;
+}
+.form label {
+    padding: 0px 0px 0px 30px;
+    /* padding-right: 10px; */
+}
+.cancel {
+    /* margin-top: 80px; */
+    padding: 30px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+}
+.submit{
+    /* margin: 80px; */
+    padding: 8px;
+    margin-left: 20px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.checkbox {
+    position: relative;
+    margin-left: 40px;
+}
+.checkbox-label {
+    position: relative;
+    margin-left: -25px;
+}
+
 /* .switch {
+
     position: relative;
 }
 

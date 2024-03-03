@@ -11,7 +11,7 @@ export const Transactions = ({allTransactions, handleDate}) => {
           <div key={id}>
             <Link to={`/${id}`} style={{ textDecoration: 'none', color: 'black' }}>
             <h1>{item_name[0].toUpperCase() + item_name.slice(1)}</h1>
-            <p>From: {from}</p>
+            <p>From: {from[0].toUpperCase() + from.slice(1)}</p>
             <p>Price: ${amount}</p>
             </Link>
           </div>

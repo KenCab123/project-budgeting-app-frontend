@@ -120,9 +120,9 @@ export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, 
     
 
   return (
-    <div>
+    <div className='transaction-form'>
         <h1>Transaction Form</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='form'>
             <label htmlFor="name">
                 Name:
                 <input 
@@ -133,8 +133,6 @@ export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, 
                  value={transaction.item_name} />
             </label>
 
-            <input type="checkbox" id='checkbox' onChange={toggleSwitch} checked={isChecked ? true : false} />
-            <label htmlFor="checkbox" className='checkbox-label' id='checkbox-label'>{isChecked ? 'Deposit' : 'Withdraw'}</label>
             <label htmlFor="amount">
                 Amount:
                 <input 
@@ -145,6 +143,8 @@ export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, 
                  value={transaction.amount}
                  min="0" />
             </label>
+            <input type="checkbox" id='checkbox' onChange={toggleSwitch} checked={isChecked ? true : false} className='checkbox' />
+            <label htmlFor="checkbox" className='checkbox-label' id='checkbox-label'>{isChecked ? 'Deposit' : 'Withdraw'}</label>
             <label htmlFor="date">
                 Date:
                 <input 
@@ -172,10 +172,10 @@ export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, 
                  name='category'
                  value={transaction.category} />
             </label>
-            <button>Submit</button>
+            <button className='submit'>Submit</button>
         </form>
         <Link to='/'>
-        <button>Cancel</button>
+        <button className='cancel'>Cancel</button>
         </Link>
     </div>
   )
