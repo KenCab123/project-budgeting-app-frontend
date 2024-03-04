@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link , useNavigate, useParams} from 'react-router-dom'
 import "./TransactionForm.css"
 
-export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, price, handleTotalPrice}) => {
-    const navigate = useNavigate()
-    const {id} = useParams()
+export const TransactionForm = ({setAllTransactions}) => {
     const[isChecked, setIsChecked] = useState(true)
     const [transaction, setTransaction] = useState({
         item_name: "",
@@ -14,18 +12,8 @@ export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, 
         category: "",
         isChecked: isChecked
     })
-
-    // useEffect (() => {
-    //     if(transaction.amount < 0) {
-    //         setTransaction(prevTransaction => ({
-    //             ...prevTransaction,
-    //             isChecked: false
-    //         }));
-            
-    //         console.log(`negative`)
-    //     }
-    //         // console.log(transaction.isChecked)
-    // },[transaction.amount])
+    const {id} = useParams()
+    const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -33,7 +21,6 @@ export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, 
         if(!isChecked){
             transaction.amount = -transaction.amount
         }
-
 
         if(id) {
             const options = {
@@ -52,7 +39,6 @@ export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, 
                 })
                 .catch((err) => console.log(err));
         } else {
-
             const options = {
                 method: "POST",
                 headers: { "Content-Type": "application/json"},
@@ -87,6 +73,7 @@ export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, 
         }
         const { name, value, type } = e.target;
         const parsedValue = type === 'number' ? parseFloat(value) : value;
+
         setTransaction(prevTransaction => ({
             ...prevTransaction,
             [name]: parsedValue
@@ -95,7 +82,6 @@ export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, 
 
     const toggleSwitch = (e) => {
         setIsChecked(!isChecked)
-        console.log(!isChecked)
     }
 
     
@@ -179,7 +165,7 @@ export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, 
             <button className='submit'>Submit</button>
         </form>
         <Link to='/'>
-        <button className='cancel'>Cancel</button>
+            <button className='cancel'>Cancel</button>
         </Link>
     </div>
   )
