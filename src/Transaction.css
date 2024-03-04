@@ -10,15 +10,16 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    column-gap: 70px;
-    row-gap: 50px;
+    gap: 60px 50px;
     text-align: center;
+    margin-top: 20px;
     padding: 50px;
 }
+
 .all-t h1 {
-    color: black;
     margin-top: -25px;
 }
+
 .all-t p {
     margin-top: 18px;
 }

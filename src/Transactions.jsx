@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import "./Transaction.css"
 
-export const Transactions = ({allTransactions, handleDate}) => {
+export const Transactions = ({allTransactions}) => {
 
   return (
     <div className='all-t'>
-    {allTransactions.map(({id, item_name, amount, date, from, category}) => {
+    {allTransactions.map(({id, item_name, amount, from}) => {
         return (
           <div key={id}>
             <Link to={`/${id}`} style={{ textDecoration: 'none', color: 'black' }}>
