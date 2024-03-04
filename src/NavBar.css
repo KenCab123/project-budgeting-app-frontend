@@ -2,21 +2,30 @@
     display: flex;
     background: rgb(75, 156, 62);
 }
+
 .nav h1 {
     text-align: center;
     margin: 30px 0px 0px 0px;
     margin-left: 40px;
     position: relative;
+}
+
+.nav h1, .nav h2 {
     cursor: default;
 }
+
+.nav h1::after, .nav button {
+    position: absolute;
+}
+
 .nav h1::after {
     content: '';
-    position: absolute;
-    bottom: 64px; 
+    bottom: 66px; 
     left: 0;
     width: 100%;
     border-bottom: 3px solid black; 
 }
+
 .nav button {
     cursor: pointer;
     right: 20px;
@@ -25,11 +34,9 @@
     width: 100px;
     border-radius: 20px;
     border: none;
-    position: absolute;
 }
 
 .nav h2 {
-    cursor: default;
     margin-left: 22%;
     margin-top: 70px;
     font-size: 40px;
