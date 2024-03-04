@@ -103,7 +103,11 @@ export const TransactionForm = ({allTransactions, setAllTransactions, setPrice, 
         if(id) {
             fetch(`http://localhost:3333/api/transactions/${id}`).then(res => res.json()).then(data => {
                 setTransaction(data.transaction)
-                if(data.transaction.amount < 0) setIsChecked(false)
+
+                if(data.transaction.amount < 0) {
+                    setIsChecked(false)
+                    data.transaction.amount = Math.abs(data.transaction.amount)
+                }
             })
         } else {
             setTransaction({

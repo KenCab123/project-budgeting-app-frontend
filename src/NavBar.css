@@ -1,6 +1,5 @@
 .nav {
     display: flex;
-    /* border: 1px solid black; */
     background: rgb(75, 156, 62);
 }
 .nav h1 {
