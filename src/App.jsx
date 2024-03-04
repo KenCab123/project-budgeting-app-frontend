@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Transactions } from './Transactions'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { TransactionDetails } from './TransactionDetails'
 import { TransactionForm } from './TransactionForm'
 import { NavBar } from './NavBar'
@@ -11,6 +11,7 @@ const App = () => {
 
   const handleTotalPrice = (amount) => {
     let color = 'green';
+
         if (amount <= 0) {
             color = 'red';
         } else if (amount < 100) {
@@ -36,12 +37,11 @@ const App = () => {
   return <div>
     <NavBar allTransactions={allTransactions} handleTotalPrice={handleTotalPrice} price={price} setPrice={setPrice}/>
     <Routes>
-      <Route path='/' element={<Transactions allTransactions={allTransactions} handleDate={handleDate}/>}/>
+      <Route path='/' element={<Transactions allTransactions={allTransactions}/>}/>
       <Route path='/:id' element={<TransactionDetails setAllTransactions={setAllTransactions} handleDate={handleDate}/>}/>
       <Route path='/edit/:id' element={<TransactionForm setAllTransactions={setAllTransactions}/>}/>
-      <Route path='/new' element={<TransactionForm allTransactions={allTransactions} setAllTransactions={setAllTransactions} handleTotalPrice={handleTotalPrice} price={price} setPrice={setPrice}/>}/>
+      <Route path='/new' element={<TransactionForm setAllTransactions={setAllTransactions}/>}/>
     </Routes>
-    
     </div>
 }
 
