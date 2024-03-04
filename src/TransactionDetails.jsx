@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import "./TransactionDetails.css"
 
 export const TransactionDetails = ({setAllTransactions, handleDate}) => {
-    const navigate = useNavigate()
-    const {id} = useParams()
     const [transactionDetail, setTransactionDetail] = useState()
 
+    const {id} = useParams()
+
+    const navigate = useNavigate()
+    
     const handleDelete = (id) => {
         const options = {
             method: "DELETE"
         }
 
         fetch(`http://localhost:3333/api/transactions/${id}`, options).then(res => res.json()).then(data => setAllTransactions(data.transactions))
+
         alert(`Transaction Deleted!`)
         navigate('/')
     }

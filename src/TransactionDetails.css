@@ -3,19 +3,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid black; */
     margin-top: 120px;
 }
 
 .details h1 {
-    margin-right: 60%;
-    margin-top: -420px;
+    margin: -420px 60% 0 0;
     position: absolute;
-    /* text-decoration: underline; */
 }
 
 .details h2 {
-    /* font-size: 50px; */
     font-weight: lighter;
     margin-top: -6px;
 }
@@ -26,12 +22,12 @@
     display: flex;
     gap: 50px;
     text-align: center;
-    /* margin: 0; */
 }
 
 .btns {
     margin-top: 80px;
 }
+
 .btns button{
     height: 60px;
     width: 100px;
